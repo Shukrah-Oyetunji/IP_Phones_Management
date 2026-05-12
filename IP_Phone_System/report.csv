@@ -1,7 +1,0 @@
-Date,Ministry,PhoneType,Extension,Action,Fault,Description,Status,Technician
-2026-03-09,GBB,7910,23456.0,Configuration,Not regerstring,Working,Samuel,
-2026-03-09,GBB,7950,45677.0,New Phone,Not regerstring,Working,dums,
-2026-03-09,NNPC,8950,45677.0,Configuration,Not regerstring,Working,Samuel,
-2026-03-09,Babcock,7950,23456.0,Repair,Not regerstring,Not Fixed,dums,
-2026-03-09,Babcock,7950,23456.0,New Phone,Not Faulty,Working,Samuel,
-2026-03-10,Babcock,7910,23456.0,Configuration,LAN Cable not working with the phone,I had to look for another LAN port to connect the phone with,Fixed,Farouk
