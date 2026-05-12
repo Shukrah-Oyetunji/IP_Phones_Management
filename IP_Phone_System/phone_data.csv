@@ -1,0 +1,10 @@
+Date,Ministry,PhoneType,Extension,Action,Fault,Description,Status,Technician
+2026-03-04,GBB,7910,23456,Repair,Not regerstring,Fixed,Shukrah
+2026-03-04,,7910,,Configuration,,Fixed,
+2026-03-09,GBB,7910,23456,Configuration,Not regerstring,Working,Samuel
+2026-03-09,GBB,7950,45677,New Phone,Not regerstring,Working,dums
+2026-03-09,NNPC,8950,45677,Configuration,Not regerstring,Working,Samuel
+2026-03-09,Babcock,7950,23456,Repair,Not regerstring,Not Fixed,dums
+2026-03-09,Babcock,7950,23456,New Phone,Not Faulty,Working,Samuel
+2026-03-10,Babcock,7910,23456,Configuration,LAN Cable not working with the phone,I had to look for another LAN port to connect the phone with,Fixed,Farouk
+2026-03-10,GBB,7950,78965,Configuration,Phone not Registring,,Working,dums

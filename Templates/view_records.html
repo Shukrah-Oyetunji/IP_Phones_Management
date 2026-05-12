@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Records</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-layout">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-brand">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="System Image">
+    </div>
+
+    <div class="navbar-nav">
+        <a href="/actions" class="btn btn-outline btn-sm">Back</a>
+        <a href="/logout" class="btn btn-outline btn-sm">Logout</a>
+    </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main-content">
+
+    <h1>All Records</h1>
+
+    <div class="card">
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" style="margin-bottom: 1rem;">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="table-responsive">
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>ID</th> 
+                        <th>Date</th> 
+                        <th>Ministry</th> 
+                        <th>Phone Type</th>
+                        <th>Extension</th> 
+                        <th>Fault</th>
+                        <th>Action</th>
+                        <th>Status</th> 
+                        <th>Support Engineer</th> 
+                        <th>Incident Time</th> 
+                        <th>Resolution Time</th> 
+                        <th>MTTR</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                        <td>{{ loop.index0 }}</td> 
+                        <td>{{ row["Date"] }}</td> 
+                        <td>{{ row["Ministry"] }}</td> 
+                        <td>{{ row["Phone Type"] }}</td> 
+                        <td>{{ row["Extension"] }}</td> 
+                        <td>{{ row["Fault"] }}</td> 
+                        <td>{{ row["Action"] }}</td> 
+                        <td>{{ row["Status"] }}</td> 
+                        <td>{{ row["Support Engineer"] }}</td> 
+                        <td>{{ row["Incident Time"] }}</td> 
+                        <td>{{ row["Resolution Time"] }}</td> 
+                        <td>{{ row["MTTR"] }}</td>
+
+                        <td>
+                            <a href="{{ url_for('edit', id=loop.index0) }}" class="btn btn-outline btn-sm">Edit</a> 
+                            <a href="{{ url_for('delete', id=loop.index0) }}" class="btn btn-outline btn-sm" onclick="return confirm('Delete this record?')">Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

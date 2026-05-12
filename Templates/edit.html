@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Record</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-layout">
+
+<div class="main-content">
+    <div class="card">
+        <h3 class="card-title">Edit Record</h3>
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label class="form-label">Ministry</label>
+                <input type="text" name="ministry" class="form-control" value="{{ record['Ministry'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Phone Type</label>
+                <input type="text" name="phone" class="form-control" value="{{ record['Phone Type'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Extension</label>
+                <input type="text" name="extension" class="form-control" value="{{ record['Extension'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Action</label>
+                <input type="text" name="action" class="form-control" value="{{ record['Action'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Fault</label>
+                <input type="text" name="fault" class="form-control" value="{{ record['Fault'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Status</label>
+                <input type="text" name="status" class="form-control" value="{{ record['Status'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Support Engineer</label>
+                <input type="text" name="tech" class="form-control" value="{{ record['Support Engineer'] }}" required>
+            </div>
+
+            <!-- 🔥 NEW SECTION -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+
+                <div class="form-group">
+                    <label class="form-label">Incident Date & Time</label>
+                    <input type="datetime-local" name="incident_time" id="incident_time"
+                        class="form-control"
+                        value="{{ record['Incident Time'] }}"
+                        required onchange="calculateMTTR()">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Resolution Date & Time</label>
+                    <input type="datetime-local" name="resolution_time" id="resolution_time"
+                        class="form-control"
+                        value="{{ record['Resolution Time'] }}"
+                        required onchange="calculateMTTR()">
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">MTTR (Auto Calculated)</label>
+                <input type="text" name="mttr" id="mttr"
+                    class="form-control"
+                    value="{{ record['MTTR'] }}"
+                    readonly>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Record</button>
+
+        </form>
+    </div>
+</div>
+
+<!-- 🔥 MTTR SCRIPT -->
+<script>
+function calculateMTTR() {
+    let incident = document.getElementById("incident_time").value;
+    let response = document.getElementById("response_time").value;
+
+    if (incident && response) {
+        let incidentDate = new Date(incident);
+        let responseDate = new Date(response);
+
+        let diff = responseDate - incidentDate;
+
+        if (diff >= 0) {
+            let minutes = Math.floor(diff / (1000 * 60));
+            let hours = Math.floor(minutes / 60);
+            let remainingMinutes = minutes % 60;
+
+            let mttrValue = hours + " hrs " + remainingMinutes + " mins";
+
+            document.getElementById("mttr").value = mttrValue;
+        } else {
+            document.getElementById("mttr").value = "Invalid Time";
+        }
+    }
+}
+</script>
+
+</body>
+</html>

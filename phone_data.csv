@@ -1,0 +1,6 @@
+Date,Ministry,Phone Type,Extension,Action,Fault,Description,Status,Support Engineer,Incident Time,Resolution Time,MTTR
+2026-03-28,Ministry of works,7910,78965,Configuration,Phone not Registring,Power Issue,Fixed,Shukrah,2026-03-19T10:49,2026-03-19T16:46,5 hrs 57 mins
+2026-03-30,NNPC,7910,78965,Configuration,No Power,nothing,Fixed,Shukrah,2026-03-30T12:02,2026-03-30T17:08,5 hrs 6 mins
+2026-03-31,DHQ,Huawei eSpace 7910,45677,Ldap Configuration,Registration,Nothing,Resolved,Dumebi,2026-03-30T14:07,2026-03-31T17:16,27 hrs 9 mins
+2026-05-02,Ministry of Transport,Huawei eSpace 7910,234567,Configuration,Registration,,Resolved,Shukrah,2026-04-27T09:57,2026-04-27T12:59,3 hrs 2 mins
+2026-05-05,Ministry of Transport,Huawei eSpace 7950,45677,Ldap Configuration,Network,,Resolved,Shukrah,2026-05-05T11:15,2026-05-05T12:16,1 hrs 1 mins

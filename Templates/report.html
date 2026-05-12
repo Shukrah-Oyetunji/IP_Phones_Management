@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report - IP Phone Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-layout" style="background-color: var(--bg-main);">
+
+    <nav class="navbar">
+        <a href="/dashboard" class="navbar-brand">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Galaxy Backbone" style="height: 40px;">
+        </a>
+        <div class="navbar-nav">
+             <a href="/dashboard" class="btn btn-outline btn-sm">Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="card">
+            <h3 class="card-title" style="margin-bottom: 2rem;">Generated Report</h3>
+            
+            {% for table in tables %}
+                <div class="table-responsive">
+                    {{ table|safe }}
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+</body>
+</html>

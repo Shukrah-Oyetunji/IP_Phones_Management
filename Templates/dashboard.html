@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - IP Phone Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-layout">
+
+    <nav class="navbar">
+        <a href="/dashboard" class="navbar-brand">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Galaxy Backbone" style="height: 40px;">
+        </a>
+        <div class="navbar-nav">
+            <a href="/actions" class="btn btn-outline btn-sm">Back</a>
+            <a href="/logout" class="btn btn-outline btn-sm">Logout</a> 
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <!-- <h1 style="margin-bottom: 2rem;"></h1> -->
+
+        <div class="grid-container">
+            <!-- Data Entry Card -->
+             
+            <div class="card">
+                <h3 class="card-title">Add New Phone Record</h3>
+
+                <form action="/save" method="post">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Incident Report Date & Time</label>
+                            <input type="datetime-local" name="incident_time" id="incident_time" class="form-control" required onchange="calculateMTTR()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Resolution Report Date & Time</label>
+                            <input type="datetime-local" name="resolution_time" id="resolution_time" class="form-control" required onchange="calculateMTTR()">
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">MTTR (Auto Calculated)</label>
+                        <input type="text" name="mttr" id="mttr" class="form-control" readonly>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Ministry/Agencies</label>
+                            <input type="text" name="ministry" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Type</label>
+                            <select name="phone" class="form-control" required>
+                                <option value="">Select Phone Type</option>
+                                <option>Huawei eSpace 7910</option>
+                                <option>Huawei eSpace 7950</option>
+                                <option>Huawei eSpace 8950</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Extension</label>
+                            <input type="text" name="extension" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Fault</label>
+                            <select name="fault" id="faultSelect" class="form-control" required onchange="toggleOtherFault()">
+                                <option value="">Select Fault</option>
+                                <option value="Hardware">Hardware</option>
+                                <option value="Registration">Registration</option>
+                                <option value="Network">Network</option>
+                                <option value="Extension/Name Change">Extension/Name Change</option>
+                                <option value="Others">Others</option>
+                            </select>
+                            <div class="form-group" id="otherFaultGroup" style="display: none;">
+                                <label class="form-label">Specify Other Fault</label>
+                                <textarea name="other_fault" id="otherFaultText" class="form-control" rows="2" placeholder="Please specify..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Action</label>
+                            <select name="action" class="form-control" required>
+                                <option value="">Select Action</option>
+                                <option>Replacement</option>
+                                <option>Configuration</option>
+                                <option>Ldap Configuration</option>
+                                <option>Firmware Upgrade</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Description (Optional)</label>
+                        <textarea name="description" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-control" required>
+                                <option value="">Select Status</option>
+                                <option>Resolved</option>
+                                <option>Not Resolved</option>
+                                <option>Escalated</option>
+                                <option>Awaiting end-user Response</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Support Engineer</label>
+                            <input type="text" name="tech" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">Save Record</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleOtherFault() {
+            var faultSelect = document.getElementById("faultSelect");
+            var otherFaultGroup = document.getElementById("otherFaultGroup");
+            var otherFaultText = document.getElementById("otherFaultText");
+            
+            if (faultSelect.value === "Others") {
+                otherFaultGroup.style.display = "block";
+                otherFaultText.required = true;
+            } else {
+                otherFaultGroup.style.display = "none";
+                otherFaultText.required = false;
+                otherFaultText.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
+
+<!-- script -->
+<script>
+function toggleRecords() {
+    const section = document.getElementById("recordsSection");
+    const btn = document.getElementById("toggleBtn");
+
+    if (section.style.display === "none") {
+        section.style.display = "block";
+        btn.innerText = "Hide Records";
+    } else {
+        section.style.display = "none";
+        btn.innerText = "View Records";
+    }
+}
+</script>

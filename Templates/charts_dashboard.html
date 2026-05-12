@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Charts Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="dashboard-layout">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-brand">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="System Image">
+    </div>
+
+    <div class="navbar-nav">
+        <a href="/actions" class="btn btn-outline btn-sm">Back</a>
+        <a href="/logout" class="btn btn-outline btn-sm">Logout</a>
+    </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main-content">
+
+    <h1>System Analytics Dashboard</h1>
+<div class="charts-dashboard">
+
+    <div class="chart-box">
+        <h4>Status Distribution</h4>
+        <canvas id="statusChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+        <h4>Ministry Distribution</h4>
+        <canvas id="ministryChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+        <h4>Phone Type Distribution</h4>
+        <canvas id="phoneTypeChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+        <h4>Action Distribution</h4>
+        <canvas id="actionChart"></canvas>
+    </div>
+
+</div>
+</main>
+
+<script>
+
+
+function generateColors(num) {
+    const colors = [];
+
+    for (let i = 0; i < num; i++) {
+        const hue = Math.floor((360 / num) * i); // spread colors evenly
+        colors.push(`hsl(${hue}, 70%, 50%)`);
+    }
+
+    return colors;
+}
+
+function createChart(id, label, dataObj) {
+
+    const labels = Object.keys(dataObj);
+    const values = Object.values(dataObj);
+    const colors = generateColors(labels.length);
+
+    new Chart(document.getElementById(id), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: label,
+                data: values,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
+const statusData = JSON.parse('{{ status_data | tojson | safe }}');
+const ministryData = JSON.parse('{{ ministry_data | tojson | safe }}');
+const phoneTypeData = JSON.parse('{{ phone_type_data | tojson | safe }}');
+const actionData = JSON.parse('{{ action_data | tojson | safe }}');
+
+createChart("statusChart", "Status Distribution", statusData);
+createChart("ministryChart", "Ministry Distribution", ministryData);
+createChart("phoneTypeChart", "Phone Type Distribution", phoneTypeData);
+createChart("actionChart", "Action Distribution", actionData);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Phone Management System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            padding: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            color: var(--gbb-green-dark);
+        }
+
+        .hero-text p {
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .hero-buttons {
+            margin-top: 2rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 350px;
+        }
+
+        .features {
+            margin-top: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-card h4 {
+            color: var(--gbb-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .cta {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #e8f5e9;
+            border-radius: var(--radius-lg);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+
+<body class="dashboard-layout">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-brand">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="System Image">
+    </div>
+
+    <div class="navbar-nav">
+        <a href="/login" class="btn btn-primary btn-sm">Login</a>
+    </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>IP Phone Management System</h1>
+
+            <p>
+                A smart solution designed to manage IP phone configurations,
+                track faults, monitor support engineers activities, and generate
+                detailed performance reports for enterprise communication unit.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="/login" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="System Image">
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <h2 style="margin-bottom: 1.5rem;">What This System Does</h2>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <h4 class = "feature-title"><i data-lucide="phone"></i><span>Phone Management</span></h4>
+                <p>Record and manage IP phone configurations and resolve efficiently.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4 class="feature-title"><i data-lucide="settings"></i><span>Fault Tracking</span></h4>
+                <p>Track issues like network problems, Regristration failure, and extension errors.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4 class="feature-title"><i data-lucide="timer"></i><span>MTTR Monitoring</span></h4>
+                <p>Automatically calculate response time for performance evaluation.</p>
+            </div>
+
+            <div class="feature-card">
+                <h4 class="feature-title"><i data-lucide="book-up"></i><span>Reports & Analytics</span></h4>
+                <p>Generate downloadable reports and visualize data with charts.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Start Managing Your IP Phones Efficiently</h2>
+        <p style="margin: 1rem 0;">Login to access your dashboard and begin tracking operations.</p>
+
+        <a href="/login" class="btn btn-primary">Login Now</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Galaxy Backbone Limited - Enterprise Communication Unit</p>
+    </footer>
+
+</main>
+<script>
+    lucide.createIcons();
+</script>
+
+</body>
+</html>

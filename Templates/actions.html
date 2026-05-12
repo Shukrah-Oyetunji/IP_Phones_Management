@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actions - IP Phone System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+
+<body class="dashboard-layout">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-brand">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="System Image">
+    </div>
+
+    <div class="navbar-nav">
+        <span>Welcome, {{ session.get("user") }}</span>
+        <a href="/logout" class="btn btn-outline btn-sm">Logout</a>
+    </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main-content">
+
+    <h1>Choose an Action</h1>
+    <p>Select what you want to do</p>
+
+    <div class="actions-grid">
+
+        <!-- ADD RECORD -->
+        <div class="action-card">
+            <h3 class="feature_title"><i data-lucide="plus-circle"></i><span>Add Record</span></h3>
+            <p>
+                Input IP phone details including ministries/agencies, faults,
+                support engineer handling, and phone status.
+            </p>
+            <a href="/dashboard" class="btn btn-primary">Go</a>
+        </div>
+
+        <!-- VIEW RECORD -->
+        <div class="action-card">
+            <h3 class="feature_title"><i data-lucide="panel-top-open"></i><span>View Records</span></h3>
+            <p>
+                View all saved IP phone records, edit existing entries,
+                or delete outdated or unwanted information.
+            </p>
+            <a href="/view_records" class="btn btn-outline">Go</a>
+        </div>
+
+        <!-- VIEW CHART -->
+        <div class="action-card">
+            <h3 class="feature_title"><i data-lucide="chart-column-decreasing"></i><span>View Charts</span></h3>
+            <p>
+                Visualize system performance showing fixed, pending,
+                and unresolved issues using bar charts.
+            </p>
+            <a href="/charts_dashboard" class="btn btn-outline">Go</a>
+        </div>
+        <!-- DOWNLOAD RECORD -->
+        <div class="action-card">
+            <h3 class="feature_title"><i data-lucide="download"></i><span> Download Records</span></h3>
+            <p>
+                Export all IP phone records into a CSV file for reporting,
+                sharing, and further analysis.
+            </p>
+            <a href="/download_records" class="btn btn-outline">Download</a>
+        </div>
+
+    </div>
+
+</main>
+<script>
+    lucide.createIcons();
+</script>
+
+</body>
+</html>
